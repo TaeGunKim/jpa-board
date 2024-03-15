@@ -1,0 +1,43 @@
+CREATE TABLE `member` (
+  `member_seq` int(11) NOT NULL AUTO_INCREMENT,
+  `member_id` varchar(50) NOT NULL,
+  `member_password` varchar(50) NOT NULL,
+  `member_name` varchar(50) NOT NULL,
+  `member_birth_date` date DEFAULT NULL,
+  `member_join_date` date DEFAULT NULL,
+  `member_create_date` datetime DEFAULT current_timestamp(),
+  `member_modify_date` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`member_seq`),
+  UNIQUE KEY `member_seq` (`member_seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+
+CREATE TABLE `vacation_request` (
+  `vacation_request_seq` int(11) NOT NULL AUTO_INCREMENT,
+  `vacation_request_member_id` varchar(50) NOT NULL,
+  `vacation_request_type` int(11) NOT NULL DEFAULT 100,
+  `vacation_request_sub_type` varchar(50) NOT NULL DEFAULT 'NONE' COMMENT 'NONE/AM/PM',
+  `vacation_request_sign_memeber` text DEFAULT NULL,
+  `vacation_request_start_date` date NOT NULL,
+  `vacation_request_end_date` date NOT NULL,
+  `vacation_request_create_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `vacation_request_create_id` varchar(50) DEFAULT NULL,
+  `vacation_request_modify_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `vacation_request_modify_id` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`vacation_request_seq`),
+  UNIQUE KEY `vacation_request_seq` (`vacation_request_seq`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+
+CREATE TABLE `vacation_given` (
+  `vacation_given_seq` int(11) NOT NULL AUTO_INCREMENT,
+  `vacation_given_member_id` varchar(50) NOT NULL,
+  `vacation_given_start_date` date NOT NULL,
+  `vacation_given_end_date` date NOT NULL,
+  `vacation_given_type` varchar(50) NOT NULL DEFAULT 'BASIC' COMMENT 'BASIC/SPECIAL',
+  `vacation_given_title` varchar(100) DEFAULT NULL,
+  `vacation_given_date` int(11) NOT NULL,
+  `vacation_given_desc` text DEFAULT NULL,
+  `vacation_given_create_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `vacation_given_create_id` varchar(50) NOT NULL,
+  PRIMARY KEY (`vacation_given_seq`),
+  UNIQUE KEY `vacation_given_seq` (`vacation_given_seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
