@@ -4,8 +4,8 @@ spring:
     hikari:
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
       jdbc-url: jdbc:log4jdbc:mariadb://localhost:3306/pama?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
-      username: root
-      password: 1234
+      username: tgkim
+      password: k1478128!
 
   # 정적 파일 변경 실시간 반영
   devtools:
@@ -22,7 +22,7 @@ spring:
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    generate-ddl: 'false'
+    generate-ddl: 'true'
     show-sql: 'true'
     open-in-view: 'false'
     hibernate:

@@ -1,55 +1,70 @@
 package com.pama.domain.member;
-import com.pama.domain.common.BaseTimeEntity;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.pama.domain.vacation.VacationGiven;
+import com.pama.dto.member.MemberDto;
+import jdk.jshell.Snippet;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Getter
+@Setter
+@ToString
+@Builder
+@Slf4j
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Entity
-@Table(name = "tb_member")
-public class Member extends BaseTimeEntity {
+@Table(name="member")
+public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;             // 회원 번호 (PK)
+    @Column(name = "member_seq")
+    private Long id;
 
-    @Column(name = "login_id")
-    private String loginId;      // 로그인 ID
+    @Column(name = "member_id")
+    private String memberId;
 
-    @Column(name = "password")
-    private String password;     // 비밀번호
+    @Column(name = "member_password")
+    private String memberPassword;
 
-    @Column(name = "name")
-    private String name;         // 이름
+    @Column(name = "member_name")
+    private String memberName;
 
-    @Column(name = "gender")
-    private Gender gender;       // 성별
+    @Column(name = "member_birth_date")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    private LocalDate memberBirthDate;
 
-    @Column(name = "birthday")
-    private String birthday;  // 생년월일
+    @Column(name = "member_join_date")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    private LocalDate memberJoinDate;
 
-    @Column(name = "delete_yn")
-    private Boolean deleteYn;    // 삭제 여부
+//    private List<VacationGiven> vacationGivenList = new ArrayList<VacationGiven>();
 
-    @Builder
-    public Member(String loginId, String password, String name, Gender gender, String birthday, Boolean deleteYn) {
-        this.loginId = loginId;
-        this.password = password;
-        this.name = name;
-        this.gender = gender;
-        this.birthday = birthday;
-        this.deleteYn = deleteYn;
+//    @Builder
+//    public Member(String memberId, String memberPassword, String memberName, LocalDate memberBirthDate, LocalDate memberJoinDate){
+//        this.memberId = memberId;
+//        this.memberPassword = memberPassword;
+//        this.memberName = memberName;
+//        this.memberBirthDate = memberBirthDate;
+//        this.memberJoinDate = memberJoinDate;
+//    }
+
+    public static Member toEntity(MemberDto dto){
+        return Member.builder()
+                .id(dto.getId())
+                .memberId(dto.getMemberId())
+                .memberPassword(dto.getMemberPassword())
+                .memberBirthDate(dto.getMemberBirthDate())
+                .memberJoinDate(dto.getMemberJoinDate())
+                .build();
     }
 
 }

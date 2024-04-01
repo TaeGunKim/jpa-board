@@ -1,4 +1,4 @@
-package com.pama.domain.member;
+package com.pama.domain.memberOld;
 
 public enum Gender {
 
